@@ -35,8 +35,8 @@ router.post("/",async(req,res)=> {
         if (!title || !contents) {
             res.status(400).json({ message: "Please provide title and contents for the post" });
         } else {
-            const postedData = await PostData.insert({title : title,contents : contents}); 
-            res.status(201).json(postedData); 
+            const postedData = await PostData.insert({contents : contents, title : title}); 
+            res.status(201).json({...postedData, title : title, contents : contents}); 
         }
     } catch {
         res.status(500).json({ message: "There was an error while saving the post to the database" })
